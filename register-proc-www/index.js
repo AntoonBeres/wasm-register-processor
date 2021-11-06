@@ -1,12 +1,12 @@
 //import * as wasm from "wasm-processor";
-import {Proc} from "./node_modules/wasm-processor-reg";
+import * as wasm from "./node_modules/wasm-processor-reg";
 
 
 var loaded_file;
 var new_file_loaded = false;
 
 const pre = document.getElementById("wasm-proc");
-const universe = Proc.build();
+const universe = wasm.Proc.build();
 
 
 

@@ -1,6 +1,4 @@
 use crate::proc::instruction_set::*;
-use std::fs::File;
-use std::io::{BufRead, BufReader};
 use wasm_bindgen::prelude::*;
 use crate::proc::DATA_REGISTERS;
 use crate::proc::MEMORY_REGISTERS;

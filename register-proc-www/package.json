@@ -33,6 +33,6 @@
     "copy-webpack-plugin": "^5.0.0"
   },
   "dependencies" : {
-	"wasm-processor": "file:pkg"
+	"wasm-processor": "./file:pkg"
   }
 }

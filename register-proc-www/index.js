@@ -1,5 +1,5 @@
 //import * as wasm from "wasm-processor";
-import {Proc} from "wasm-processor-reg";
+import {Proc} from "./node_modules/wasm-processor-reg";
 
 
 var loaded_file;

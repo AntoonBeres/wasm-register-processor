@@ -198,8 +198,8 @@ dependencies = [
 ]
 
 [[package]]
-name = "wasm-processor"
-version = "0.1.0"
+name = "wasm-processor-reg"
+version = "0.2.0"
 dependencies = [
  "console_error_panic_hook",
  "wasm-bindgen",

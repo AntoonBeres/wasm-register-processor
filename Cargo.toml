@@ -1,6 +1,6 @@
 [package]
-name = "wasm-processor"
-version = "0.1.0"
+name = "wasm-processor-reg"
+version = "0.2.0"
 authors = ["Whity25 <antoonberes@hotmail.com>"]
 edition = "2018"
 

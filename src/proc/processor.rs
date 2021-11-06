@@ -136,13 +136,25 @@ impl Proc {
     pub fn render(&self) -> String{
         self.to_string()
     }
+    pub fn clear_registers(&mut self){
+        for i in 0.. DATA_REGISTERS+MEMORY_REGISTERS{
+            self.d[i] = 0;
+        }
+    }
     pub fn load_program(&mut self, src: String) {
         self.text_memory = self.parser.parse(src);
+        self.clear_registers();
     }
-    pub fn step(&mut self) {
+    pub fn step(&mut self) -> Result<(), JsValue>{
+        if self.d[PC] as usize >= self.text_memory.len() {
+            return Err(JsValue::from("end of text memory reached"));
+        } 
         let instruction = self.text_memory[self.d[PC] as usize];
+
         self.aluOp(&instruction);
+
         self.d[PC] += 1;
+        Ok(())
     }
 }
 
@@ -150,12 +162,23 @@ impl Proc {
 
 impl fmt::Display for Proc {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        for i in 0..DATA_REGISTERS{
-            write!(f, "D{}: {} \n", i, self.d[i as usize]);
+        for i in 0..DATA_REGISTERS+MEMORY_REGISTERS{
+            let mut index: usize = 0;
+            let regtype = match i {
+                j if j<DATA_REGISTERS => 'D',
+                _ => {index= DATA_REGISTERS; 'A'}
+            };
+            if i as usize == PC {
+                write!(f, "PC: {} \n", self.d[i as usize]);
+            } else {
+                write!(f, "{}{}: {} \n",regtype, i-index, self.d[i as usize]);
+            }
+
+            
         }
-        for i in 0..MEMORY_REGISTERS{
+        /*for i in 0..MEMORY_REGISTERS{
             write!(f, "A{}: {} \n", i, self.d[(DATA_REGISTERS+i) as usize ]);
-        }
+        }*/
         write!(f,"CC: \n");
         write!(f,"V: {}\n", self.cc.V);
         write!(f,"N: {}\n", self.cc.N);
@@ -182,7 +205,7 @@ impl Proc {
         println!("Z: {}", self.cc.Z);
     }
 
-    pub fn aluOp(&mut self, instruction: &instruction_set::Instruction) {
+    pub fn aluOp(&mut self, instruction: &instruction_set::Instruction) -> Result<(), &str>{
         match instruction.op {
             AluOp::ADD => {
                 let r2 = match instruction.r2 {
@@ -288,11 +311,11 @@ impl Proc {
                 }
             }
             AluOp::JMP => {
-                self.d[PC] = instruction.immediate.unwrap();
+                self.d[PC] = instruction.immediate.unwrap()-1;
             }
             AluOp::JPZ => {
                 if self.cc.Z {
-                    self.d[PC] = instruction.immediate.unwrap();
+                    self.d[PC] = instruction.immediate.unwrap()-1;
                 }
             }
             AluOp::JNZ => {
@@ -321,5 +344,6 @@ impl Proc {
                 }
             }
         }
+        Ok(())
     }
 }

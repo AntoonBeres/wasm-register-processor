@@ -15,6 +15,6 @@ extern {
 }
 
 #[wasm_bindgen]
-pub fn greet() {
-    alert("Hello, wasm-processor!");
+pub fn greet(content: &str) {
+    alert(content);
 }

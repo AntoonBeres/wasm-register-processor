@@ -13,8 +13,18 @@
         <pre id="loaded-program-text"></pre>
         <br>
         <br>
-        <p>example programs:</p>
+        <p>example programs to download:</p>
         <a href="example_programs/test.asm" download="infinite_loop.asm">infinite +2 loop</a>
+        <br><br>
+        <p>
+          TO DO: <br> 
+          <ul>
+            <li>error handling</li>
+            <li>instructions for subroutines (JSR, RET, ..)</li>
+            <li>cleaner ASM syntax (support for named memory locations)</li>
+            <li>prettier UI</li>
+          </ul>
+        </p>
       </div>
       <div class="col-md-6 justify-content-center">
         <p> 
@@ -29,7 +39,13 @@
             <li class="list-group-item">LDI</li>
             <li class="list-group-item">LOD</li>
             <li class="list-group-item">STO</li>
-            <li class="list-group-item">JMP (attention! first instruction has adress 0, PC starts at 0, (not 1)</li>
+            <li class="list-group-item">JMP (attention! first instruction has adress 0, PC starts at 0, not 1)</li>
+            <li class="list-group-item">JPZ (attention! first instruction has adress 0, PC starts at 0, not 1)</li>
+            <li class="list-group-item">JNZ (attention! first instruction has adress 0, PC starts at 0, not 1)</li>
+            <li class="list-group-item">JPN (attention! first instruction has adress 0, PC starts at 0, not 1)</li>
+            <li class="list-group-item">JNN (attention! first instruction has adress 0, PC starts at 0, not 1)</li>
+            <li class="list-group-item">JPV (attention! first instruction has adress 0, PC starts at 0, not 1)</li>
+            <li class="list-group-item">JNV (attention! first instruction has adress 0, PC starts at 0, not 1)</li>
           </ul>
         </p>
         <noscript>This page contains webassembly and javascript content, please enable javascript in your browser.</noscript>

@@ -12,6 +12,8 @@ use std::fmt;
 use wasm_bindgen::prelude::*;
 
 const PC: usize = 15;
+const TP: usize = 14;
+const SP: usize = 13;
 
 const I32MAX: i64 = std::u32::MAX as i64;
 const I32MIN: i64 = std::u32::MIN as i64;
@@ -170,7 +172,12 @@ impl fmt::Display for Proc {
             };
             if i as usize == PC {
                 write!(f, "PC: {} \n", self.d[i as usize]);
-            } else {
+            } else if i as usize == TP {
+                write!(f, "TP: {} \n", self.d[i as usize]);
+            } else if i as usize == SP {
+                write!(f, "SP: {} \n", self.d[i as usize]);
+            } 
+            else {
                 write!(f, "{}{}: {} \n",regtype, i-index, self.d[i as usize]);
             }
 

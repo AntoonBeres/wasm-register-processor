@@ -35,7 +35,6 @@ init().then(() => {
             updateProgramText();
         };
         reader.readAsText(files[0]);
-
     }
 
     document.getElementById('stepProc').addEventListener('click', stepProc);

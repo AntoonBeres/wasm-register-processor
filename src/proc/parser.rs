@@ -4,11 +4,15 @@ use crate::proc::MEMORY_REGISTERS;
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
-pub struct Parser {}
+pub struct Parser {
+    code_content: String
+}
 
 impl Parser {
     pub fn new() -> Parser {
-        Parser {}
+        Parser {
+            code_content: "".to_owned()
+        }
     }
     pub fn parse(&mut self, src: String) -> Vec<Instruction> {
         //println!("filename: {}", filename);
@@ -25,6 +29,12 @@ impl Parser {
             let line: String = line.split("\t").collect();
 
             let code = line.split("//").take(1).collect::<Vec<_>>()[0];
+
+            if code.is_empty(){
+                continue;
+            }
+
+
             let fragments: Vec<&str> = code.split(",").collect();
             let mut r1: Option<usize> = None;
             let mut r2: Option<usize> = None;
@@ -175,7 +185,7 @@ impl Parser {
                     }
 
                 },
-                AluOp::JMP  => {
+                AluOp::JMP | AluOp::JPZ | AluOp::JNZ | AluOp::JPN | AluOp::JNN | AluOp::JPV | AluOp::JNV  => {
                     immediate = Some(
                         fragments[OP_FRAGMENT + 1]
                             .to_owned()
@@ -196,19 +206,6 @@ impl Parser {
                 op,
             };
             op_list.push(instruction);
-            /*let r1: usize = match operation{
-                ADD | SUB | MUL | DIV | CMP | ADI | LDI | LOD | STO => from_str::<usize>(fragments[1]),
-                _ => 0
-            };
-            let r2: Option<usize> = match operation{
-                ADD | SUB | MUL | DIV | CMP => from_str::<usize>(fragments[2]),
-                LOD => {
-
-                }
-                STO => {
-                    if(fragments.size() )
-                }
-            };*/
 
             println!("{}. {}", index + 1, line);
         }

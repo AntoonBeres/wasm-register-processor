@@ -1,0 +1,3 @@
+[submodule "register-proc-www"]
+	path = register-proc-www
+	url = https://github.com/AntoonBeres/register-proc-www.git

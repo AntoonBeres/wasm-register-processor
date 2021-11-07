@@ -4,17 +4,14 @@
 
 ## About
 
-[**📚 Read this template tutorial! 📚**][template-docs]
 
-This template is designed for compiling Rust libraries into WebAssembly and
-publishing the resulting package to NPM.
+A simulator for a fictional register-processor, losely based on the motorla 68000 and meant for teaching students in a computer-systems course
 
-Be sure to check out [other `wasm-pack` tutorials online][tutorials] for other
-templates and usages of `wasm-pack`.
-
-[tutorials]: https://rustwasm.github.io/docs/wasm-pack/tutorials/index.html
-[template-docs]: https://rustwasm.github.io/docs/wasm-pack/tutorials/npm-browser-packages/index.html
-
+## 🚴 Dependencies
+  - Make sure the latest version of the rust-toolchain are install (cargo and rustc)
+  - install wasm-pack [`wasm-pack`]
+[`wasm-pack`](https://rustwasm.github.io/wasm-pack/installer/)
+  
 ## 🚴 Usage
 
 ```
@@ -25,18 +22,15 @@ cd my-project
 ### 🛠️ Build with `wasm-pack build`
 
 ```
-wasm-pack build
+sh build.sh
 ```
 
-### 🔬 Test in Headless Browsers with `wasm-pack test`
+
+### 🎁 deploy on a server
 
 ```
-wasm-pack test --headless --firefox
-```
-
-### 🎁 Publish to NPM with `wasm-pack publish`
-
-```
+cd www
+python3 -m http.server
 wasm-pack publish
 ```
 

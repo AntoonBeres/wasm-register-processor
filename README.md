@@ -9,8 +9,7 @@ A simulator for a fictional register-processor, losely based on the motorla 6800
 
 ## 🚴 Dependencies
   - Make sure the latest version of the rust-toolchain are install (cargo and rustc)
-  - install wasm-pack [`wasm-pack`]
-[`wasm-pack`](https://rustwasm.github.io/wasm-pack/installer/)
+  - install wasm-pack [`wasm-pack`](https://rustwasm.github.io/wasm-pack/installer/)
   
 ## 🚴 Usage
 

@@ -2,8 +2,8 @@ import init, { greet, Proc } from "./pkg/wasm_processor_reg.js";
 
 init().then(() => {
 
-    var loaded_file;
-    var new_file_loaded = false;
+    let loaded_file;
+    let new_file_loaded = false;
 
     const pre = document.getElementById("wasm-proc");
 
@@ -17,13 +17,13 @@ init().then(() => {
 
     document.getElementById('upload').addEventListener('change', readFileAsString);
     function readFileAsString() {
-        var files = this.files;
+        let files = this.files;
         if (files.length === 0) {
             console.log('No file is selected');
             return;
         }
 
-        var reader = new FileReader();
+        let reader = new FileReader();
         reader.onload = function (event) {
             //console.log('File content:', event.target.result);
             loaded_file = event.target.result;
@@ -44,6 +44,7 @@ init().then(() => {
             universe.step();
         }
         catch(error) {
+            alert(error);
             console.error(error);
         }
         pre.textContent = universe.render();
@@ -57,8 +58,8 @@ init().then(() => {
     }
 
     function updateProgramText(){
-        var lines = loaded_file.split('\n');
-        var result = "";
+        let lines = loaded_file.split('\n');
+        let result = "";
         for(let i=0; i<lines.length; i++){
             result += i;
             result += ": ";

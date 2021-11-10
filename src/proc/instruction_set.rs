@@ -28,7 +28,7 @@ pub enum AluOp {
     JNN, // JNN,a: if(!n) jump to a
     JPV, // JPV,a: if(v) jump to a
     JNV, // JNV,a: if(!v) jump to a
-    HLT, // HLT:   Halt the processor (infinite loop on self)
+    //HLT, // HLT:   Halt the processor (infinite loop on self)
 
 }
 

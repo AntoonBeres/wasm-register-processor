@@ -1,0 +1,6 @@
+ADI,D1,8
+ADI,D2,4
+ADD,D1,D2	// this is a comment
+ADD,D5,D1
+SUB,D1,D2
+MUL,D5,D1

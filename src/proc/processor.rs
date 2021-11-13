@@ -8,8 +8,10 @@ use crate::proc::DATA_REGISTERS;
 use crate::proc::MEMORY_REGISTERS;
 use crate::proc::MEMORY_SIZE;
 use crate::proc::TEXT_SIZE;
+use std::collections::HashMap;
 use std::fmt;
 use wasm_bindgen::prelude::*;
+
 
 const PC: usize = 15;
 const TP: usize = 14;
@@ -21,7 +23,9 @@ use crate::proc::instruction_set;
 use crate::proc::instruction_set::AluOp;
 use crate::proc::parser;
 
-struct CC {
+#[wasm_bindgen]
+#[derive(Copy, Clone)]
+pub struct CC {
     Z: bool,
     N: bool,
     V: bool,
@@ -36,6 +40,9 @@ impl CC {
         }
     }
 }
+
+
+
 
 #[wasm_bindgen]
 pub struct Proc {
@@ -157,6 +164,24 @@ impl Proc {
 
         self.d[PC] += 1;
         Ok(())
+    }
+
+    pub fn getCC(&self) -> CC {
+        self.cc.clone()
+    }
+
+    pub fn getRegisterName(&self, regNR: usize) -> String {
+        match regNR {
+           d if d < DATA_REGISTERS => format!("D{}", d).to_owned(),
+           d if (d < DATA_REGISTERS+MEMORY_REGISTERS && d != SP && d != PC && d != TP) => format!("A{}", d-DATA_REGISTERS).to_owned(),
+           PC => "PC".to_owned(),
+           TP => "TP".to_owned(),
+           SP => "SP".to_owned(),
+           _ => "NULL".to_owned(), 
+        }
+    }
+    pub fn getRegisters(&self) -> Vec<i64> {
+        Vec::from(self.d)
     }
 }
 

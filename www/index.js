@@ -13,8 +13,6 @@ init().then(() => {
     pre.textContent = universe.render();
 
 
-
-
     document.getElementById('upload').addEventListener('change', readFileAsString);
     function readFileAsString() {
         let files = this.files;
@@ -68,5 +66,8 @@ init().then(() => {
         }
         pre_program.textContent = result;
     }
+
+
+    
 
 });

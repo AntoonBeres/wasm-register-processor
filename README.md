@@ -8,7 +8,7 @@
 A simulator for a fictional register-processor, losely based on the motorla 68000 and meant for teaching students in a computer-systems course
 
 ## 🚴 Dependencies
-  - Make sure the latest version of the rust-toolchain is install (cargo and rustc)
+  - Make sure the latest version of the [`rust-toolchain`](https://www.rust-lang.org/tools/install) is installed (cargo and rustc)
   - install wasm-pack [`wasm-pack`](https://rustwasm.github.io/wasm-pack/installer/)
   
 ## 🚴 Usage

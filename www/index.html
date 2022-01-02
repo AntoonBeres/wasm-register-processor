@@ -34,7 +34,6 @@
         TO DO: <br>
       <ul>
         <li>error handling</li>
-        <li>instructions for subroutines (JSR, RET, ..)</li>
         <li>cleaner ASM syntax (support for named memory locations)</li>
         <li>prettier UI</li>
       </ul>
@@ -61,6 +60,10 @@
         <li class="list-group-item">JNN (attention! first instruction has adress 0, PC starts at 0, not 1)</li>
         <li class="list-group-item">JPV (attention! first instruction has adress 0, PC starts at 0, not 1)</li>
         <li class="list-group-item">JNV (attention! first instruction has adress 0, PC starts at 0, not 1)</li>
+        <li class="list-group-item">JSR (attention! first instruction has adress 0, PC starts at 0, not 1)</li>
+        <li class="list-group-item">RET</li>
+        <li class="list-group-item">LNK</li>
+        <li class="list-group-item">ULK</li>
       </ul>
       </p>
       <noscript>This page contains webassembly and javascript content, please enable javascript in your
@@ -70,11 +73,7 @@
         <p>upload program: </p>
         <input type="file" id="upload" name="upload source code">
       </div>
-      <div>
-        <p>processor controls: </p>
-        <button id="resetRegisters">reset registers</button>
-        <button id="stepProc">step</button>
-      </div>
+      
 
 
     </div>
@@ -82,7 +81,11 @@
       <p>processor state: </p>
       <br>
       <pre id="wasm-proc"></pre>
-
+      <div>
+        <p>processor controls: </p>
+        <button id="resetRegisters">reset registers</button>
+        <button id="stepProc">step</button>
+      </div>
 
     </div>
   </div>

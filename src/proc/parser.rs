@@ -57,6 +57,10 @@ impl Parser {
                 "JNN" => AluOp::JNN,
                 "JPV" => AluOp::JPV,
                 "JNV" => AluOp::JNV,
+                "JSR" => AluOp::JSR,
+                "RET" => AluOp::RET,
+                "LNK" => AluOp::LNK,
+                "ULK" => AluOp::ULK,
                 _ => panic!("invalid command"),
             };
             match op {
@@ -185,7 +189,7 @@ impl Parser {
                     }
 
                 },
-                AluOp::JMP | AluOp::JPZ | AluOp::JNZ | AluOp::JPN | AluOp::JNN | AluOp::JPV | AluOp::JNV  => {
+                AluOp::JMP | AluOp::JPZ | AluOp::JNZ | AluOp::JPN | AluOp::JNN | AluOp::JPV | AluOp::JNV | AluOp::JSR  => {
                     immediate = Some(
                         fragments[OP_FRAGMENT + 1]
                             .to_owned()
@@ -193,7 +197,18 @@ impl Parser {
                             .unwrap(),
                     );
                 },
+                AluOp::RET => {
 
+                }
+                AluOp::LNK | AluOp::ULK => {
+                    r1 = Some(
+                        fragments[OP_FRAGMENT + 1][1..]
+                            .to_owned()
+                            .parse::<usize>()
+                            .unwrap() 
+                            +DATA_REGISTERS,
+                    );
+                }
                 _ => {
                     panic!("unsupported op")
                 }

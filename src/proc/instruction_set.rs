@@ -28,6 +28,10 @@ pub enum AluOp {
     JNN, // JNN,a: if(!n) jump to a
     JPV, // JPV,a: if(v) jump to a
     JNV, // JNV,a: if(!v) jump to a
+    JSR, // JSR,a: call subroutine at a
+    RET, // RET: return from subroutine
+    LNK, // LNK,Ax: establish dynamic link with Ax as base
+    ULK, // ULK,Ax: Restore previous environment using Ax
     //HLT, // HLT:   Halt the processor (infinite loop on self)
 
 }

@@ -69,6 +69,9 @@ impl Memory32bit {
     pub fn set(&mut self, location: i64, value: i64) {
         self.content[location as usize] = value;
     }
+    pub fn getref(&mut self, location: i64) -> &mut i64 {
+        return &mut self.content[location as usize];
+    }
 }
 
 fn add_32(int1: i64, int2: i64) -> i64 {
@@ -352,28 +355,50 @@ impl Proc {
             }
             AluOp::JNZ => {
                 if !self.cc.Z {
-                    self.d[PC] = instruction.immediate.unwrap();
+                    self.d[PC] = instruction.immediate.unwrap()-1;
                 }
             }
             AluOp::JPN => {
                 if self.cc.N {
-                    self.d[PC] = instruction.immediate.unwrap();
+                    self.d[PC] = instruction.immediate.unwrap()-1;
                 }
             }
             AluOp::JNN => {
                 if !self.cc.N {
-                    self.d[PC] = instruction.immediate.unwrap();
+                    self.d[PC] = instruction.immediate.unwrap()-1;
                 }
             }
             AluOp::JPV => {
                 if self.cc.V {
-                    self.d[PC] = instruction.immediate.unwrap();
+                    self.d[PC] = instruction.immediate.unwrap()-1;
                 }
             }
             AluOp::JNV => {
                 if !self.cc.V {
-                    self.d[PC] = instruction.immediate.unwrap();
+                    self.d[PC] = instruction.immediate.unwrap()-1;
                 }
+            }
+            AluOp::JSR => {
+                self.d[SP] += 1;
+                self.memory.set(self.d[SP], self.d[PC]);
+                self.d[PC] = instruction.immediate.unwrap()-1;
+            }
+            AluOp::RET => {
+                self.d[PC] = self.d[SP];
+                self.d[SP] -= 1;
+            }
+            AluOp::LNK => {
+                let r1 = instruction.r1.unwrap();
+                self.d[SP] += 1;
+                *self.memory.getref(self.d[SP]) = self.d[r1];
+                self.d[r1] = self.d[SP];
+            }
+            AluOp::ULK => {
+                let r1 = instruction.r1.unwrap();
+                self.d[SP] = self.d[r1];
+                let oldval = self.memory.get(self.d[SP]);
+                self.d[r1] = oldval;
+                self.d[SP] -= 1;
             }
         }
         Ok(())
